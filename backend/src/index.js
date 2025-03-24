@@ -33,7 +33,14 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      // ให้อนุญาต origin ที่ตรงกับใน allowedOrigins หรือถ้าไม่มีก็ให้อนุญาตทุก origin
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true, // Allow cookies and authorization headers
   })
 );
