@@ -33,15 +33,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        // Allow requests from allowed origins
-        callback(null, true);
-      } else {
-        // Reject other origins
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: allowedOrigins,
     credentials: true, // Allow cookies and authorization headers
   })
 );
