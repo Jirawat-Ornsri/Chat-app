@@ -23,14 +23,19 @@ cloudinary.v2.config({
 
 const PORT = process.env.PORT;
 
+const allowedOrigins = [
+  "http://localhost:5173",  
+  "https://chat-app-lake-theta.vercel.app"
+];
+
 app.use(express.json({ limit: "10mb"}));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: `${process.env.VITE_FRONTEND_URL}`,
-    credentials: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true
   })
 );
 
