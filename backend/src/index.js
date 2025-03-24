@@ -30,6 +30,7 @@ app.use(
   cors({
     origin: `${process.env.VITE_FRONTEND_URL}`,
     credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   })
 );
 
