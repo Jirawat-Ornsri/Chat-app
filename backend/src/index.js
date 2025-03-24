@@ -25,7 +25,7 @@ const PORT = process.env.PORT;
 
 const allowedOrigins = [
   "http://localhost:5173",  
-  "https://chat-app-lake-theta.vercel.app"
+  "https://chat-app-roan-theta-33.vercel.app"
 ];
 
 app.use(express.json({ limit: "10mb"}));
