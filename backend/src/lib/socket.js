@@ -11,6 +11,9 @@ const io = new Server(server, {
       "http://localhost:5173", // Dev frontend (Vite)
       "https://chat-app-roan-theta-33.vercel.app", // Production frontend
     ],
+    credentials: true, // Allow cookies and authorization headers
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
   },
 });
 
