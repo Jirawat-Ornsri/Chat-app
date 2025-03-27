@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import cloudinary from "cloudinary";
 
+import path from "path";
+
 import { connectDB } from "./lib/db.js";
 
 import authRoutes from "./routes/auth.route.js";
@@ -22,6 +24,7 @@ cloudinary.v2.config({
 
 
 const PORT = process.env.PORT;
+const __dirname = path.resolve();
 
 const allowedOrigins = [
   "http://localhost:5173",  
@@ -35,17 +38,19 @@ app.use(
   cors({
     origin: allowedOrigins,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Server is running!");
-});
+if(process.env.NODE_ENV==="production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend","dist","index.html"));
+  });
+}
 
 
 server.listen(PORT, () => {
