@@ -22,21 +22,16 @@ cloudinary.v2.config({
 });
 
 
-
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
-const allowedOrigins = [
-  "http://localhost:5173",  
-  "https://chat-app-roan-theta-33.vercel.app"
-];
 
 app.use(express.json({ limit: "10mb"}));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );

@@ -5,17 +5,9 @@ import express from "express";
 const app = express();
 const server = http.createServer(app);
 
-const allowedOrigins = [
-  "http://localhost:5173",  
-  "https://chat-app-roan-theta-33.vercel.app"
-];
-
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    origin: ["http://localhost:5173"],
   },
 });
 
